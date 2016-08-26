@@ -1,0 +1,16 @@
+{
+  "name": "knex",
+  "main": "knex.d.ts",
+  "homepage": "https://github.com/tgriesser/knex#readme",
+  "version": "0.11.10",
+  "globalDevDependencies": {
+    "node": "registry:env/node#6.0.0+20160825160117"
+  },
+  "devDependencies": {
+    "blue-tape": "registry:npm/blue-tape#0.2.0+20160723033700",
+    "lodash": "registry:npm/lodash#4.0.0+20160723033700"
+  },
+  "dependencies": {
+    "bluebird": "registry:npm/bluebird#3.4.1+20160811213708"
+  }
+}
