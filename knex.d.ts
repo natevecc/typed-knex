@@ -165,28 +165,30 @@ declare namespace Knex {
     (tableName: TableName, raw: Raw): QueryBuilder;
     (tableName: TableName, column1: string, column2: string): QueryBuilder;
     (tableName: TableName, column1: string, raw: Raw): QueryBuilder;
-    (tableName: TableName, column1: string, operator: string, column2: string): QueryBuilder;
+    (tableName: TableName, column1: string|Raw, operator: string, column2: string|Raw): QueryBuilder;
   }
+
+  type JoinColumn = string|Raw;
 
   interface JoinClause {
     on(raw: Raw): JoinClause;
     on(callback: Function): JoinClause;
     on(columns: {[key: string]: string|Raw}): JoinClause;
-    on(column1: string, column2: string): JoinClause;
+    on(column1: JoinColumn, column2: JoinColumn): JoinClause;
     on(column1: string, raw: Raw): JoinClause;
-    on(column1: string, operator: string, column2: string): JoinClause;
+    on(column1: JoinColumn, operator: string, column2: JoinColumn): JoinClause;
     andOn(raw: Raw): JoinClause;
     andOn(callback: Function): JoinClause;
-    andOn(columns: {[key: string]: string|Raw}): JoinClause;
-    andOn(column1: string, column2: string): JoinClause;
-    andOn(column1: string, raw: Raw): JoinClause;
-    andOn(column1: string, operator: string, column2: string): JoinClause;
+    andOn(columns: {[key: string]: JoinColumn}): JoinClause;
+    andOn(column1: JoinColumn, column2: JoinColumn): JoinClause;
+    andOn(column1: JoinColumn, raw: Raw): JoinClause;
+    andOn(column1: JoinColumn, operator: string, column2: JoinColumn): JoinClause;
     orOn(raw: Raw): JoinClause;
     orOn(callback: Function): JoinClause;
-    orOn(columns: {[key: string]: string|Raw}): JoinClause;
-    orOn(column1: string, column2: string): JoinClause;
-    orOn(column1: string, raw: Raw): JoinClause;
-    orOn(column1: string, operator: string, column2: string): JoinClause;
+    orOn(columns: {[key: string]: JoinColumn}): JoinClause;
+    orOn(column1: JoinColumn, column2: JoinColumn): JoinClause;
+    orOn(column1: JoinColumn, raw: Raw): JoinClause;
+    orOn(column1: JoinColumn, operator: string, column2: JoinColumn): JoinClause;
     using(column: string|string[]|Raw|{[key: string]: string|Raw}): JoinClause;
     type(type: string): JoinClause;
   }
@@ -199,9 +201,9 @@ declare namespace Knex {
     (raw: Raw): QueryBuilder;
     (callback: (queryBuilder: QueryBuilder) => any): QueryBuilder;
     (object: Object): QueryBuilder;
-    (columnName: string, value: Value): QueryBuilder;
-    (columnName: string, operator: string, value: Value): QueryBuilder;
-    (columnName: string, operator: string, query: QueryBuilder): QueryBuilder;
+    (columnName: string|Raw, value: Value): QueryBuilder;
+    (columnName: string|Raw, operator: string, value: Value): QueryBuilder;
+    (columnName: string|Raw, operator: string, query: QueryBuilder): QueryBuilder;
   }
 
   interface WhereRaw extends RawQueryBuilder {
@@ -213,13 +215,13 @@ declare namespace Knex {
   }
 
   interface WhereNull {
-    (columnName: string): QueryBuilder;
+    (columnName: string|Raw): QueryBuilder;
   }
 
   interface WhereIn {
-    (columnName: string, values: Value[]): QueryBuilder;
-    (columnName: string, callback: Function): QueryBuilder;
-    (columnName: string, query: QueryBuilder): QueryBuilder;
+    (columnName: string|Raw, values: Value[]): QueryBuilder;
+    (columnName: string|Raw, callback: Function): QueryBuilder;
+    (columnName: string|Raw, query: QueryBuilder): QueryBuilder;
   }
 
   interface WhereBetween {
@@ -239,7 +241,7 @@ declare namespace Knex {
   }
 
   interface OrderBy {
-    (columnName: string, direction?: string): QueryBuilder;
+    (columnName: string|Raw, direction?: string): QueryBuilder;
   }
 
   interface Union {
