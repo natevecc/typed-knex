@@ -151,6 +151,7 @@ declare namespace Knex {
 
   interface Table {
     (tableName: string): QueryBuilder;
+    (tableDescription: Raw): QueryBuilder;
     (callback: Function): QueryBuilder;
   }
 
