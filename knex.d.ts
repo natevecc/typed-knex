@@ -276,6 +276,7 @@ declare namespace Knex {
 
   interface RawBuilder {
     (value: Value): Raw;
+    (sql: QueryBuilder): Raw;
     (sql: string, ...bindings: Value[]): Raw;
     (sql: string, bindings: Value[]): Raw;
     (sql: string, bindings: Object): Raw;
